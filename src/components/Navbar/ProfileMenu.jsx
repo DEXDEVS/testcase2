@@ -21,7 +21,7 @@ const ProfileMenu = () => {
         <div className='flex items-center gap-1 sm:gap-2'>
           <div className='avatar'>
             <div className='w-10 rounded-full'>
-              <img alt='User Avatar' src={avatar} />
+              <img alt='User Avatar' src={`${import.meta.env.VITE_API_URL}/${avatar}`} />
             </div>
           </div>
           <p className='text-sm/none font-bold text-white'>{name}</p>
