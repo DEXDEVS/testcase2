@@ -40,7 +40,7 @@ const List = ({ setIsOpen }) => {
                 width='128'
                 height='128'
                 className='size-9 bg-base-content/10 p-0.5 mask mask-circle'
-                src={user.avatar}
+                src={`${import.meta.env.VITE_API_URL}/${user.avatar}`}
                 style={{ color: 'transparent' }}
               />
 
