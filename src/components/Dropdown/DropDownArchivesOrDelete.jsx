@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  useDeleteCardListMutation,
-  useMoveCardListToArchiveMutation,
+  useMoveToTrashByStatusMutation,
+  useMoveCardListToArchiveMutation
 } from '../../features/cards/cardsApi';
 import cn from '../../lib/cn';
 
-const DropDownArchivesOrDelete = ({ status }) => {
+const DropDownArchivesOrDelete = ({ status, totalCards }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const [moveCardlistToArchive, { isLoading, isError, isSuccess }] =
     useMoveCardListToArchiveMutation();
-  const [deleteCardList] = useDeleteCardListMutation();
+  const [moveCardListToTrash] = useMoveToTrashByStatusMutation();
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -31,14 +31,17 @@ const DropDownArchivesOrDelete = ({ status }) => {
   };
 
   const handleDeleteAll = (status) => {
-    deleteCardList(status);
-    setIsOpen(false);
+    if(totalCards>0){
+      moveCardListToTrash(status);
+      setIsOpen(false);
+    }
   };
   const handleMoveToArchiveAll = (status) => {
-    moveCardlistToArchive(status);
-    setIsOpen(false);
+    if(totalCards>0){
+      moveCardlistToArchive(status);
+      setIsOpen(false);
+    }
   };
-
   return (
     <div className='w-full relative' ref={dropdownRef}>
       <div className='text-end'>

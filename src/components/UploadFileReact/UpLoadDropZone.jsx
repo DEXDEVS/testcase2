@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Dropzone from 'react-dropzone';
-import * as XLSX from 'xlsx';
-import { excelJsonToData } from '../../lib/extractDataFromExcel';
 import SuccessTickIcon from '../icons/SuccessTickIcon';
 import TrashIcon from '../icons/TrashIcon';
+import {useUploadExcelFileMutation} from "../../features/cards/cardsApi.js";
 
 const UpLoadDropZone = ({ setData, file, setFile }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [uploadFile, {data, isLoading, isError, isSuccess}] = useUploadExcelFileMutation()
   const handleDrop = (acceptedFiles) => {
     if (acceptedFiles.length > 0) {
       setFile(acceptedFiles[0]);
@@ -27,26 +27,29 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
     setData(null);
   };
   const handleOnclick = (file) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const arrayBuffer = e.target.result;
-      const workbook = XLSX.read(new Uint8Array(arrayBuffer), {
-        type: 'array',
-      });
-
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet, {
-        header: 1,
-        blankrows: false,
-        defval: 'empty',
-      });
-      const result = excelJsonToData(jsonData);
-      setData(result);
-    };
-    reader.readAsArrayBuffer(file);
+    uploadFile(file);
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      document.getElementById('loadingModal').showModal();
+    }
+  }, [isLoading]);
+  useEffect(() => {
+    if (isSuccess) {
+      document.getElementById('loadingModal').close();
+      setData(data);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      document.getElementById('loadingModal').close();
+      document.getElementById('ErrorModal').showModal();
+      setFile(null);
+    }
+  }, [isError]);
 
   return (
     <div className='dropdown'>

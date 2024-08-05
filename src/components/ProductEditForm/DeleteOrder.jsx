@@ -1,13 +1,13 @@
 import React from 'react';
 import trashIcon from '../../assets/icons/trash-icon.svg';
-import { useDeleteCardMutation } from '../../features/cards/cardsApi';
+import { useMoveToTrashMutation } from '../../features/cards/cardsApi';
 
 const DeleteOrder = ({ isModal, cardID, handleDrawerClose }) => {
-  const [deleteCard, { isLoading, isError, isSuccess }] =
-    useDeleteCardMutation();
-  const handleDeleteOrder = (cardID) => {
+  const [moveToTrash, { isLoading, isError, isSuccess }] =
+      useMoveToTrashMutation();
+  const handleMoveToTrashOrder = (cardID) => {
     if (cardID) {
-      deleteCard(cardID);
+      moveToTrash(cardID);
       if (isModal) {
         document.getElementById('productEditModal').close();
       } else {
@@ -17,7 +17,7 @@ const DeleteOrder = ({ isModal, cardID, handleDrawerClose }) => {
   };
   return (
     <span
-      onClick={() => handleDeleteOrder(cardID)}
+      onClick={() => handleMoveToTrashOrder(cardID)}
       className='tooltip cursor-pointer'
       data-tip='למחוק'
     >

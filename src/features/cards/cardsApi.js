@@ -23,6 +23,22 @@ export const cardsApi = apiSlice.injectEndpoints({
       query: () => '/cards/archived',
       providesTags: ['ArchivedCards'],
     }),
+    getTrashedCards: builder.query({
+      query: () => '/cards/trashCardList',
+      providesTags: ['TrashedCards'],
+    }),
+    uploadExcelFile: builder.mutation({
+      query: (file) => {
+        const formData = new FormData();
+        formData.append('excel', file);
+        return{
+          url: '/cards/uploadFile',
+          method: 'POST',
+          body: formData,
+          formData:true
+        }
+      },
+    }),
     addCards: builder.mutation({
       query: (data) => ({
         url: '/cards/add',
@@ -111,6 +127,45 @@ export const cardsApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    moveToTrash: builder.mutation({
+      query: (id) => ({
+        url: `/cards/moveToTrash/${id}`,
+        method: 'PUT',
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(setSerachResultRefetch(true));
+          dispatch(forceDashboardRefetch(true));
+        } catch {
+          // do nothing
+        }
+      },
+      invalidatesTags: ['Cards', 'TrashedCards'],
+    }),
+    moveToTrashByStatus: builder.mutation({
+      query: (status) => ({
+        url: `/cards/moveToTrashByStatus/${status}`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['Cards', 'TrashedCards'],
+    }),
+    restoreCardFromTrash: builder.mutation({
+      query: (id) => ({
+        url: `/cards/restoreFromTrash/${id}`,
+        method: 'PATCH',
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(setSerachResultRefetch(true));
+          dispatch(forceDashboardRefetch(true));
+          dispatch(apiSlice.util.invalidateTags(['Cards', 'TrashedCards']));
+        } catch {
+          // do nothing
+        }
+      },
+    }),
     deleteCard: builder.mutation({
       query: (id) => ({
         url: `/cards/delete/${id}`,
@@ -145,7 +200,10 @@ export const {
   useEditCardMutation,
   useMoveSingleCardToArchiveMutation,
   useMoveCardListToArchiveMutation,
-  useDeleteCardMutation,
-  useDeleteCardListMutation,
+    useMoveToTrashMutation,
+    useMoveToTrashByStatusMutation,
+    useRestoreCardFromTrashMutation,
   useRestoreCardFromArchiveMutation,
+  useUploadExcelFileMutation,
+  useGetTrashedCardsQuery
 } = cardsApi;

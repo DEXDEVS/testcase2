@@ -49,6 +49,6 @@ const customBaseQuery = async (args, api, extraOptions) => {
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: customBaseQuery,
-  tagTypes: ['ArchivedCards', 'Cards'],
+  tagTypes: ['ArchivedCards', 'Cards', 'TrashedCards'],
   endpoints: (builder) => ({}),
 });

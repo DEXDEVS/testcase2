@@ -1,13 +1,13 @@
 import React from 'react';
 import { stringToFormattedDate } from '../../lib/dateFormatter';
 import ProductTypeIcon from '../icons/ProductTypeICon';
-import RestoreFromArchive from './RestoreFromArchive';
+import RestoreCard from "./RestoreCard.jsx";
 
-const TableItem = ({ card }) => {
-  const { cardNumber, dueDate, client, address, type, id } = card;
+const TableItem = ({ card, listType }) => {
+  const { order, dueDate, client, address, type, id } = card;
   return (
     <tr className='bg-base-100' dir='rtl'>
-      <th>{cardNumber}</th>
+      <th>{`${order?.orderNumber} (${type?.name} ${type?.typeID})`}</th>
       <td>
         <ProductTypeIcon
           type={type?.name}
@@ -20,7 +20,7 @@ const TableItem = ({ card }) => {
       <td>{address?.street + ' , ' + address?.city}</td>
       <td>ארכיון</td>
       <td>
-        <RestoreFromArchive id={id} />
+         <RestoreCard id={id} listType={listType}/>
       </td>
     </tr>
   );

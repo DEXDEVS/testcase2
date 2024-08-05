@@ -7,6 +7,7 @@ import LoginPage from "../pages/LoginPage";
 import Orders from "../pages/Orders";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import PublicRoute from "./PublicRoute/PublicRoute";
+import Trash from "../pages/Trash.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,15 @@ export const router = createBrowserRouter([
     element: (
       <PrivateRoute>
         <Archive />
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/orders/trash",
+    element: (
+      <PrivateRoute>
+        <Trash />
       </PrivateRoute>
     ),
     errorElement: <ErrorPage />,

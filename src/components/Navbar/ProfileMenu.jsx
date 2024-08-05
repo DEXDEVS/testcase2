@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useLogoutMutation } from '../../features/auth/authApi';
 import ArchivesIcon from '../icons/ArchivesIcon';
+import TrashIcon from "../icons/TrashIcon.jsx";
 
 const ProfileMenu = () => {
   const { name, avatar } = useSelector((state) => state.auth.user) || {};
@@ -36,6 +37,12 @@ const ProfileMenu = () => {
           <Link to='/orders/archive'>
             <ArchivesIcon className='w-5 h-5' />
             ארכיון
+          </Link>
+        </li>
+        <li>
+          <Link to='/orders/trash'>
+            <TrashIcon className='w-5 h-5' />
+            Trash
           </Link>
         </li>
         <li>
