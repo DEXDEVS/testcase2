@@ -20,7 +20,6 @@ const Table = ({cards,listType}) => {
                     <th>מספר טלפון</th>
                     <th>כתובת</th>
                     <th>סטטוס</th>
-                    <th>ערוך</th>
                 </tr>
                 </thead>
                 <tbody className='bg-base-100'>

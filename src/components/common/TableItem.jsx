@@ -2,12 +2,13 @@ import React from 'react';
 import { stringToFormattedDate } from '../../lib/dateFormatter';
 import ProductTypeIcon from '../icons/ProductTypeICon';
 import RestoreCard from "./RestoreCard.jsx";
+import PermanentlyDelete from "./PermanentlyDelete.jsx";
 
 const TableItem = ({ card, listType }) => {
-  const { order, dueDate, client, address, type, id } = card;
+  const { orderNumber, dueDate, client, address, type, id } = card;
   return (
     <tr className='bg-base-100' dir='rtl'>
-      <th>{`${order?.orderNumber} (${type?.name} ${type?.typeID})`}</th>
+      <th>{`${orderNumber} (${type?.name} ${type?.typeID})`}</th>
       <td>
         <ProductTypeIcon
           type={type?.name}
@@ -22,6 +23,9 @@ const TableItem = ({ card, listType }) => {
       <td>
          <RestoreCard id={id} listType={listType}/>
       </td>
+        {listType === 'trash' && <td>
+            <PermanentlyDelete id={id}/>
+        </td>}
     </tr>
   );
 };

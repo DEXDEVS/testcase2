@@ -176,18 +176,18 @@ export const cardsApi = apiSlice.injectEndpoints({
           await queryFulfilled;
           dispatch(setSerachResultRefetch(true));
           dispatch(forceDashboardRefetch(true));
+          dispatch(apiSlice.util.invalidateTags(['Cards','TrashedCards']));
         } catch {
           // do nothing
         }
       },
-      invalidatesTags: ['Cards'],
     }),
     deleteCardList: builder.mutation({
       query: (status) => ({
         url: `/cardlist/delete/${status}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Cards'],
+      invalidatesTags: ['Cards','TrashedCards'],
     }),
   }),
 });
@@ -200,10 +200,11 @@ export const {
   useEditCardMutation,
   useMoveSingleCardToArchiveMutation,
   useMoveCardListToArchiveMutation,
-    useMoveToTrashMutation,
-    useMoveToTrashByStatusMutation,
-    useRestoreCardFromTrashMutation,
+  useMoveToTrashMutation,
+  useMoveToTrashByStatusMutation,
+  useRestoreCardFromTrashMutation,
   useRestoreCardFromArchiveMutation,
   useUploadExcelFileMutation,
-  useGetTrashedCardsQuery
+  useGetTrashedCardsQuery,
+  useDeleteCardMutation
 } = cardsApi;

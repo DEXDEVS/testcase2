@@ -30,7 +30,6 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
     uploadFile(file);
     setIsOpen(false);
   };
-
   useEffect(() => {
     if (isLoading) {
       document.getElementById('loadingModal').showModal();

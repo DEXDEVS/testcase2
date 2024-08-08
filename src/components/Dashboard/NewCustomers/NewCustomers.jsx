@@ -26,7 +26,7 @@ const NewCustomers = () => {
   let content = null;
   if (!isLoading && !isError && data && data?.data) {
     const cards = data.data;
-    content = cards.map((card) => <Order key={card.cardNumber} card={card} />);
+    content = cards.map((card, i) => <Order key={i} card={card} />);
   }
   return (
     <div className='' dir='rtl'>
@@ -53,12 +53,12 @@ const NewCustomers = () => {
 };
 
 function Order({ card }) {
-  const { type, client, address, dueDate, status, order } = card || {};
+  const { type, client, address, dueDate, status, orderNumber } = card || {};
   return (
     <tr>
       <th
         style={{ color: statusesTextColors[status] }}
-      >{`${order?.orderNumber} (${type?.name} ${type?.typeID})`}</th>
+      >{`${orderNumber} (${type?.name} ${type?.typeID})`}</th>
       <td>
         <div className='w-8 p-2 bg-[#E5F6FF] rounded-full'>
           <img

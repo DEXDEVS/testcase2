@@ -9,7 +9,7 @@ import { stringToFormattedDate } from '../../../../lib/dateFormatter';
 import { colors, productTypesIcon } from '../../../../lib/staticData';
 
 const Order = ({ card }) => {
-  const { cardNumber, client, dueDate, type, status, order } = card || {};
+  const { client, dueDate, type, status, orderNumber } = card || {};
   const isMobile = useIsMobile();
   const {
     setNodeRef,
@@ -64,7 +64,7 @@ const Order = ({ card }) => {
             className='inline-block px-3 py-1 rounded-full'
             style={{ backgroundColor: colors[status] }}
           >
-            {`${order?.orderNumber} (${type?.name} ${type?.typeID})`}
+            {`${orderNumber} (${type?.name} ${type?.typeID})`}
           </span>
         </h2>
         <div className='flex justify-between gap-1'>

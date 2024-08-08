@@ -104,7 +104,7 @@ export default function ProductEditForm({ isModal }) {
       </div>
       <div className='flex justify-between'>
         <h3 className='text-[#2E2C34] font-semibold text-[28px]'>
-          {`${editCardData?.order?.orderNumber} (${editCardData?.type?.name} ${editCardData?.type?.typeID})`}
+          {`${editCardData?.orderNumber} (${editCardData?.type?.name} ${editCardData?.type?.typeID})`}
         </h3>
         {isModal ? (
           <span

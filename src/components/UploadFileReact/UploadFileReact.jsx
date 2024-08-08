@@ -10,11 +10,11 @@ const UploadFileReact = () => {
 
   useEffect(() => {
     if (data) {
-      if (data.totalCards?.length > 1) {
+      if (data?.length > 1) {
         document.getElementById('ordersAddModal').showModal();
         setFile(null);
-      } else if (data.totalCards?.length === 1) {
-        addCards({ orderInfo: data.orderInfo, cards: data.totalCards });
+      } else if (data?.length === 1) {
+        addCards({ cards: data });
         setFile(null);
         setData(null);
       }
@@ -46,13 +46,12 @@ const UploadFileReact = () => {
     <>
       <div className='dropdown dropdown-end relative'>
         <UpLoadDropZone setData={setData} file={file} setFile={setFile} />
-
-        {data && data.totalCards?.length > 1 && (
+        {data && data?.length > 1 && (
           <dialog id='ordersAddModal' className='modal' dir='rtl'>
             <div className='modal-box max-w-3xl p-12'>
               {/* if there is a button in form, it will close the modal */}
               <AddOrdersModal
-                data={data}
+                totalCards={data}
                 setData={setData}
                 addCards={addCards}
                 isLoading={isLoading}

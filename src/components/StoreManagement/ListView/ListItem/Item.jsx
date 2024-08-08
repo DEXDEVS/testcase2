@@ -15,7 +15,7 @@ const Item = ({
   handleDrawerToggle,
   isDragOverlay,
 }) => {
-  const { status, id, client, dueDate, type, cardNumber, address, order } =
+  const { status, id, client, dueDate, type, orderNumber, address, order } =
     card || {};
   const isMobile = useIsMobile();
   const {
@@ -69,7 +69,7 @@ const Item = ({
               className='bg-base-100 cursor-grabbing'
               dir='rtl'
             >
-              <th>{cardNumber}</th>
+              <th>{orderNumber}</th>
               <td>
                 <div className='w-8 p-2 bg-[#E5F6FF] rounded-full'>
                   <img
@@ -110,7 +110,7 @@ const Item = ({
       className='bg-base-100 cursor-grab'
       dir='rtl'
     >
-      <th>{`${order?.orderNumber} (${type?.name} ${type?.typeID})`}</th>
+      <th>{`${orderNumber} (${type?.name} ${type?.typeID})`}</th>
       <td>
         <div className='w-8 p-2 bg-[#E5F6FF] rounded-full'>
           <img

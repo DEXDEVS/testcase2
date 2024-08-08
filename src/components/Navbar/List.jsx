@@ -30,6 +30,7 @@ const List = ({ setIsOpen }) => {
       <>
         {data.data.map((activity, idx) => {
           const { user, action, cardNumbers, desc } = activity;
+
           return (
             <div
               key={idx}

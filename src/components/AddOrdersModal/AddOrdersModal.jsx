@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { stringToFormattedDate } from '../../lib/dateFormatter.js';
 
-const AddOrdersModal = ({ data, setData, addCards, isLoading }) => {
-  const { orderInfo, totalCards } = data || {};
+const AddOrdersModal = ({ totalCards, setData, addCards, isLoading }) => {
   const [selectedCards, setSelectedCards] = useState(totalCards);
 
   const handleCloseModal = () => {
@@ -19,7 +18,7 @@ const AddOrdersModal = ({ data, setData, addCards, isLoading }) => {
     } else {
       setSelectedCards((selectedCards) => {
         return selectedCards.filter((c) => {
-          return c.cardNumber !== card.cardNumber;
+          return c['type']['sID'] !== card['type']['sID'];
         });
       });
     }
@@ -32,8 +31,8 @@ const AddOrdersModal = ({ data, setData, addCards, isLoading }) => {
     }
   };
   const handleSubmit = () => {
-    if (orderInfo && selectedCards.length > 0) {
-      addCards({ orderInfo, cards: selectedCards });
+    if (selectedCards.length > 0) {
+      addCards({cards: selectedCards });
       setData(null);
       setSelectedCards([]);
     }
@@ -97,7 +96,7 @@ const AddOrdersModal = ({ data, setData, addCards, isLoading }) => {
                     </th>
                     <td>
                       <div className='flex items-center gap-3'>
-                        <span>{card?.cardNumber}</span>
+                        <span>{`${card['orderNumber']} (${card['type']['name']} ${card['type']['typeID']})`}</span>
                       </div>
                     </td>
                     <td>

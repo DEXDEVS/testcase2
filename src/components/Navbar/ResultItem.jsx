@@ -10,7 +10,7 @@ const ResultItem = ({ card }) => {
   };
   return (
     <tr onClick={() => handleClickItem(card)} className='hover cursor-pointer'>
-      <td>{card['order']['orderNumber']}</td>
+      <td>{card['orderNumber']}</td>
       <td>{`${card['type']['name']} ${card['type']['typeID']}`}</td>
       <td>{card['client']['name']}</td>
       <td>{card['status']}</td>
