@@ -4,6 +4,7 @@ import SuccessTickIcon from '../icons/SuccessTickIcon';
 import TrashIcon from '../icons/TrashIcon';
 import {useUploadExcelFileMutation} from "../../features/cards/cardsApi.js";
 
+
 const UpLoadDropZone = ({ setData, file, setFile }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [uploadFile, {data, isLoading, isError, isSuccess}] = useUploadExcelFileMutation()
@@ -12,6 +13,12 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
       setFile(acceptedFiles[0]);
     }
   };
+
+  const openModal = () => {
+    document.getElementById('newModal').showModal();
+  };
+
+
   const toggleDropdown = () => {
     setIsOpen((prevValue) => !prevValue);
     setFile(null);
@@ -30,6 +37,7 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
     uploadFile(file);
     setIsOpen(false);
   };
+
   useEffect(() => {
     if (isLoading) {
       document.getElementById('loadingModal').showModal();
@@ -126,6 +134,69 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
                     <span>זרוק קבצים כאן...</span>
                   </div>
                 </div>
+
+                <div className="p-4 new">
+        <button onClick={openModal} className="btn btn-outline border-gray-300">צור תוכנית באופן ידני</button>
+      </div>
+      <dialog id="newModal" className='max-w-3xl p-14 rounded-md'>
+        <div className='flex justify-between'>
+          <h3 class="text-[#2E2C34] font-semibold text-[28px]">OD006 (ארון קיר נ1)</h3>
+      <button 
+            type="button" 
+            onClick={() => document.getElementById('newModal').close()} 
+            className="close-button btn btn-sm btn-circle btn-ghost text-xl text-[#84818A] " 
+        >
+            &times;
+        </button>
+        </div>
+        <hr className='h-px my-8 bg-gray-200 border-0 mt-8' />
+         <form>
+          <div className='<div grid grid-cols-1 mb-28 sm:grid-cols-2 md:grid-cols-3 gap-6 text-[#040415]></div>'>
+        <div className='form-control w-full max-w-xs'>
+          <label className='text-[#84818A] font-semibold label-text pb-2'>Order Number (מספור):</label>
+        </div>
+
+        <div className='form-control w-full max-w-xs'>
+          <label className='text-[#84818A] font-semibold label-text pb-2'>Customer Name (שם):</label>
+          <input className='font-medium border-[#ebeaed] border-2 focus:outline-none focus:text-[#00A5FF] focus:border-[#00A5FF] shadow-sm input input-bordered w-full max-w-xs text-right' type="text"  required />
+        </div>
+
+        <div className='form-control w-full max-w-xs'>
+          <label className='text-[#84818A] font-semibold label-text pb-2'>Installation Deadline (דדליין להתקנה):</label>
+          <input className='font-medium border-[#ebeaed] border-2 focus:outline-none focus:text-[#00A5FF] focus:border-[#00A5FF] shadow-sm input input-bordered w-full max-w-xs text-right' type="date"  required />
+        </div>
+
+        <div className='form-control w-full max-w-xs'> 
+          <label className='text-[#84818A] font-semibold label-text pb-2'>Order Date (תאריך הזמנה):</label>
+          <input className='font-medium border-[#ebeaed] border-2 focus:outline-none focus:text-[#00A5FF] focus:border-[#00A5FF] shadow-sm input input-bordered w-full max-w-xs text-right' type="date"  required />
+        </div>
+
+        <div className='form-control w-full max-w-xs'>
+          <label className='text-[#84818A] font-semibold label-text pb-2'>Type (סוג):</label>
+          <input className='font-medium border-[#ebeaed] border-2 focus:outline-none focus:text-[#00A5FF] focus:border-[#00A5FF] shadow-sm input input-bordered w-full max-w-xs text-right' type="text"  required />
+        </div>
+
+        <div className='form-control w-full max-w-xs'>
+          <label className='text-[#84818A] font-semibold label-text pb-2'>Phone 1 (מספר טלפון 1):</label>
+          <input className='font-medium border-[#ebeaed] border-2 focus:outline-none focus:text-[#00A5FF] focus:border-[#00A5FF] shadow-sm input input-bordered w-full max-w-xs text-right' type="tel"  required />
+        </div>
+
+        <div className='form-control w-full max-w-xs'>
+          <label className='text-[#84818A] font-semibold label-text pb-2'>Phone 2 (מספר טלפון 2):</label>
+          <input className='font-medium border-[#ebeaed] border-2 focus:outline-none focus:text-[#00A5FF] focus:border-[#00A5FF] shadow-sm input input-bordered w-full max-w-xs text-right' type="tel"  />
+        </div>
+
+        <div className='form-control w-full max-w-xs'>
+          <label className='text-[#84818A] font-semibold label-text pb-2'>Address (כתובת):</label>
+          <input className='font-medium border-[#ebeaed] border-2 focus:outline-none focus:text-[#00A5FF] focus:border-[#00A5FF] shadow-sm input input-bordered w-full max-w-xs text-right' type="text"  required />
+        </div>
+
+        </div>
+        <button className='btn px-12 btn-primary text-white text-sm font-semibold drawer-button' type="submit">Save</button>
+      </form>
+      </dialog>
+   
+
               </section>
             )}
           </Dropzone>
