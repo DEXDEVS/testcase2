@@ -302,14 +302,14 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
                           סוג
                         </label>
                         <div
-        className={`flex justify-center relative font-medium input border-2 ${
-          isOpen2 ? "border-[#00A5FF] text-[#00A5FF]" : "border-[#ebeaed]"
-        } shadow-sm p-0 input-bordered w-full text-right rounded-md`}
-      >
-                          <div
-                            onClick={toggleDropdown2}
-                            className="flex items-center w-full gap-2 mx-3  bg-white  cursor-pointer hover:bg-gray-50"
-                          >
+                          className="flex justify-center relative font-medium input border-2 border-none shadow-sm p-0 input-bordered w-full text-right rounded-md"
+                        >
+                            <div
+                              onClick={toggleDropdown2}
+                              className={`flex items-center gap-2 px-3 border-2 ${
+                                isOpen2 ? "border-[#00A5FF] text-[#00A5FF]" : "border-[#ebeaed] text-black"
+                              } bg-white cursor-pointer hover:bg-gray-50 shadow-sm rounded-md w-full text-right`}
+                            >
                             {selected.icon()} {selected.name}
                             <svg
                               className="w-4 h-4 ml-2 mr-auto"
@@ -322,17 +322,24 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
                             </svg>
                           </div>
                           {isOpen2 && (
-                            <ul className="absolute top-10 z-10 w-full bg-white border-[#ebeaed] border-2 shadow-lg rounded-md mt-3 px-3 py-4 flex flex-col gap-3">
-                              {types.map((item) => (
-                                <li
-                                  key={item.id}
-                                  onClick={() => handleSelect(item)}
-                                  className="p-2 border border-[#ebeaed] group hover:bg-[#D2EFFF] hover:text-[#00A5FF] font-medium rounded-md shadow-sm cursor-pointer flex flex-row gap-[6px] items-center"
-                                >
-                                  <span className="w-7 h-7 bg-[#EAE9EC] group-hover:bg-[#00a6ff27] p-[6px] rounded-full flex items-center justify-center">{item.icon()}</span> {item.name}
-                                </li>
-                              ))}
-                            </ul>
+                          <ul className="absolute top-10 z-10 w-full bg-white border-[#ebeaed] border-2 shadow-lg rounded-md mt-3 px-3 py-4 flex flex-col gap-3">
+                          {types.map((item) => (
+                            <li
+                              key={item.id}
+                              onClick={() => handleSelect(item)}
+                              className={`p-2 border border-[#ebeaed] group hover:bg-[#D2EFFF] hover:text-[#00A5FF] font-medium rounded-md shadow-sm cursor-pointer flex flex-row gap-[6px] items-center ${
+                                item.id === selected.id ? "bg-[#D2EFFF] text-[#00A5FF]" : "bg-white text-black"
+                              }`}
+                            >
+                              <span className={`w-7 h-7 p-[6px] rounded-full flex items-center justify-center ${
+                                item.id === selected.id ? "bg-[#00a6ff27]" : "bg-[#EAE9EC]"
+                              }`}>
+                                {item.icon()}
+                              </span>
+                              {item.name}
+                            </li>
+                          ))}
+                        </ul>
                           )}
                         </div>
                         {/* <input
@@ -365,7 +372,9 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
                           type="tel"
                         />
                       </div>
-
+                      <p className="w-full col-span-3 text-[#84818A] font-semibold uppercase text-sm md:col-span-3">
+      כתובת לקוח
+    </p>
                       <div className="form-control w-full max-w-xs">
                         <label className="text-[#84818A] font-semibold label-text pb-2">
                         רחוב
