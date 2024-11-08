@@ -310,7 +310,7 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
                                 isOpen2 ? "border-[#00A5FF] text-[#00A5FF]" : "border-[#ebeaed] text-black"
                               } bg-white cursor-pointer hover:bg-gray-50 shadow-sm rounded-md w-full text-right`}
                             >
-                            {selected.icon()} {selected.name}
+                            <span className="w-7 h-7 bg-[#00a6ff27] p-[6px] rounded-full flex items-center justify-center text-[#00A5FF]">{selected.icon()}</span> {selected.name}
                             <svg
                               className="w-4 h-4 ml-2 mr-auto"
                               fill="none"
