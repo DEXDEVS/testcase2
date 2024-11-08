@@ -331,7 +331,7 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
                                 item.id === selected.id ? "bg-[#D2EFFF] text-[#00A5FF]" : "bg-white text-black"
                               }`}
                             >
-                              <span className={`w-7 h-7 p-[6px] rounded-full flex items-center justify-center ${
+                              <span className={`w-7 h-7 p-[6px] rounded-full flex items-center justify-center group-hover:bg-[#00a6ff27] ${
                                 item.id === selected.id ? "bg-[#00a6ff27]" : "bg-[#EAE9EC]"
                               }`}>
                                 {item.icon()}
