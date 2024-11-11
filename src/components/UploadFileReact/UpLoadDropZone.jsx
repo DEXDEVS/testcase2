@@ -243,8 +243,6 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
       }
 
       await response.json();
-    } catch (error) {
-      console.log(error);
     }
   };
 
