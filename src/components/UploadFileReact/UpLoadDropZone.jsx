@@ -141,9 +141,9 @@ const UpLoadDropZone = ({ setData, file, setFile }) => {
       }
 
       await response.json();
-      alert("Success!");
+      // alert("Success!");
     } catch (error) {
-      alert("Error!");
+      // alert("Error!");
     }
   };
 
